@@ -1,0 +1,44 @@
+CMPT 353 Exercise 2 Answers
+Student: Michael Kuby
+Student ID: 301562996
+
+1.  In the hint above, what is the result of the calculation:
+    data['timestamp']*fit.slope + fit.intercept? What is the type, and describe the values.
+
+Answer:
+
+The function is a linear regression function of the form y = mx + b where,
+
+    y is the predicted value in the form of a rating;
+
+    m is the slope of the linear regression model;
+
+    x is the data['timestamp'] value at a point in numerical form;
+
+    b is the expected value of y when x = 0, which is the expected rating when 
+        the dog rater first started rating dogs.
+
+Since each value of the series data['timestamp'] has been converted to an integer value by the
+.to_timestamp function, this linear regression equation allows us to produce predicted rating values
+for the dogs based on when the tweet was posted. For example, when dogs were first rated in 2016 (at
+the start of our data), the expected rating was 10.68/10 according to our data. By May of 2019 the
+expected rating for each dog (the value of y in our model) was 14.31.
+
+2.  In the same hint, why does this produce a fit line on the graph? Why are the 
+    created_at values and timestamp values paired correctly to make points on the plot?
+
+Answer:
+
+As described in the answer to question 1, scipy.stats.linregress has created a linear regression
+model of our data, supplying us with a slope and y intercept we can use to predict rating values based
+on the tweet date. Converting datetime objects to numerical form supplies us with a numerical value 
+of x that we can then use in the linear regression model (a necessary step since a datetime object can clearly not be 
+operated on using numerical operators). This produces a fit line on the graph because this is 
+precisely what a linear regression model does: gives us predicted values of y based on a slope, y intercept, 
+and supplied value for x.
+
+The linear regression model pairs the created_at values and timestamp values correctly to make points on the plot
+since the conversion between datetime objects and numerical form is a bijection; they are in a sense identical
+values represented by different types. And since they are identical, their relationship to y (the ranking) is 
+also identical. Hence, when plotted, the relationship from timestamp --> rating mirrors the 
+datetime --> rating relationship, since fundamentally it is identical.
